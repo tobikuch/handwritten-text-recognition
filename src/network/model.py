@@ -115,8 +115,9 @@ class HTRModel:
                 filepath=checkpoint,
                 monitor=monitor,
                 save_best_only=True,
-                save_weights_only=True,
-                verbose=verbose),
+                save_weights_only=False,
+                verbose=verbose,
+                options=tf.saved_model.SaveOptions()),
             EarlyStopping(
                 monitor=monitor,
                 min_delta=1e-8,
@@ -198,6 +199,7 @@ class HTRModel:
                              validation_steps=validation_steps, validation_freq=validation_freq,
                              max_queue_size=max_queue_size, workers=workers,
                              use_multiprocessing=use_multiprocessing, **kwargs)
+
         return out
 
     def predict(self,
